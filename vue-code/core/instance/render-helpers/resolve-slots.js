@@ -16,8 +16,9 @@ export function resolveSlots(children: ?Array<VNode>, context: ?Component): { [k
 		// named slots should only be respected if the vnode was rendered in the
 		// same context.
 
+        // child.context === context || child.functionalContext === context: 判断是否来自同一个域
+        // child.data 标签是否有属性值 <div class="aaa" slot="header"></div>
 		if ((child.context === context || child.functionalContext === context) && child.data && child.data.slot != null) {
-			// 如果是在父节点插入的slot并且有slot值
 			const name = child.data.slot;
 
 			// slots.传入的slot名称

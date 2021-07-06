@@ -15,16 +15,16 @@ import { resolveSlots, resolveScopedSlots } from "./render-helpers/resolve-slots
 
 /*初始化render*/
 export function initRender(vm: Component) {
-	// _vnode
+	// _vnode 组件的真实节点，它的tag就是<template>标签下的第一个节点
+    // _vnode 在created中是没有的，在mounted才有
 	vm._vnode = null; // the root of the child tree
 	vm._staticTrees = null;
 
-	// $vnode  _parentVnode： 父树中的占位符节点
+	// $vnode  _parentVnode： 父树中的占位符节点，它的tag就是在父组件中的组件名 $vnode可以说是_vnode的父级
 	const parentVnode = (vm.$vnode = vm.$options._parentVnode); // the placeholder node in parent tree  父树中的占位符节点
 
 	// 父组件的vm实例
 	const renderContext = parentVnode && parentVnode.context;
-
 
 	vm.$slots = resolveSlots(vm.$options._renderChildren, renderContext);
 
